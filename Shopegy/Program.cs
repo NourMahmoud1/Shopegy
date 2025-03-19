@@ -5,7 +5,7 @@ namespace Shopegy
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            //nour
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
