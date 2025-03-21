@@ -23,8 +23,6 @@ namespace Shopegy.Models
 		public ProductCategorie ProductCategorie { get; set; }
 
 		// navigation property for product review
-		[ForeignKey("ProductReivew")]
-		public int ProductReivewId { get; set; }
-		public ProductReivew ProductReivew { get; set; }
+		public ICollection<ProductReivew> ProductReivews { get; set; }
 	}
 }

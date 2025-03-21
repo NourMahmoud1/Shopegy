@@ -10,5 +10,10 @@ namespace Shopegy.Models
         public string ProductID { get; set; }
         public decimal Rating { get; set; }
         public DateTime ReviewDate { get; set; } = DateTime.Now;
-    }
+		//navigation property for product
+
+		[ForeignKey("Product")]
+		public int ProductId { get; set; }
+		public Product Product { get; set; }
+	}
 }
