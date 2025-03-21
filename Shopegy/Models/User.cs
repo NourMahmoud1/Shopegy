@@ -2,7 +2,7 @@
 
 namespace Shopegy.Models
 {
-    public class users
+    public class User
     {
        
         public int Id { get; set; }

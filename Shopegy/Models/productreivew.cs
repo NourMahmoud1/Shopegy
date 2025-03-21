@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Shopegy.Models
 {
-    public class productreivew
+    public class ProductReivew
     {
         public int ReviewID { get; set; }
         public int UserID { get; set; }
