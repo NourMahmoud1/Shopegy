@@ -1,11 +1,17 @@
-﻿namespace Models;
+﻿namespace Shopegy.Models;
 
  public class Shipping
 {
     public int ShippingId { get; set; }
-    public int OrderId { get; set; }
-    public string ShppingAddressId { get; set; }
-    public string ShippingDate { get; set; }
-    public int TrackingNumber { get; set; }
+    public DateTime ShippingDate { get; set; }
+    public string TrackingNumber { get; set; }
     public string Status { get; set; }
+    public DateTime createdAt { get; set; } = DateTime.Now;
+
+    public int ShippingAddressId { get; set; }
+    public ShippingAddress ShippingAddress { get; set; }
+    
+    public int OrderID { get; set; }
+    public Order Order { get; set; }
+
 }

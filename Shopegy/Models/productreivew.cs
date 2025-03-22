@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
+//namespace Shopegy.Models
 namespace Shopegy.Models
-{
     public class ProductReivew
     {
         public int ReviewID { get; set; }

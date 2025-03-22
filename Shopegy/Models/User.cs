@@ -15,5 +15,9 @@ namespace Shopegy.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public int? CartId { get; set; }
+        public ICollection<ShippingAddress> ShippingAddresses { get; set; } ;
+        public ICollection<ProductReivew> productreivew { get; set; };
+        public ICollection<ShippingAddress> ShippingAddresses { get; set; };
+        public DbSet<Order> Orders { get; set; };
     }
 }
