@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using Models;
 using Shopegy.Models;
 using System.Collections.Generic;
 using System.Reflection.Emit;

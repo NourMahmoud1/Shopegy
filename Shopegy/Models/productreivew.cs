@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 //namespace Shopegy.Models
 namespace Shopegy.Models
+{
     public class ProductReivew
     {
         public int ReviewID { get; set; }
@@ -14,10 +15,10 @@ namespace Shopegy.Models
 
 		[ForeignKey("Product")]
 		public int ProductId { get; set; }
-		public Product Product { get; set; }
+		public Product? Product { get; set; }
         //navigation property for user
         [ForeignKey("User")]
         public int UserID { get; set; }
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 }

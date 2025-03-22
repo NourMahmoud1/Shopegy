@@ -29,10 +29,10 @@ namespace Shopegy.Models
         // Navigation property for Payments
         public ICollection<Payment>? Payments { get; set; }
         // Navigation property for shipping 
-        public ICollection<Shipping> Shipping { get; set; }
+        public ICollection<Shipping>? Shipping { get; set; }
 
         [ForeignKey("User")]
         public int UserID { get; set; }
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 }
