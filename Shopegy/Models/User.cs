@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+
 namespace Shopegy.Models
 {
     public class User
     {
-       
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
@@ -15,5 +15,8 @@ namespace Shopegy.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public int? CartId { get; set; }
+        public ICollection<ShippingAddress>? ShippingAddresses { get; set; }
+        public ICollection<ProductReivew>? ProductReviews { get; set; }
+        public ICollection<Order>? Orders { get; set; }
     }
 }

@@ -11,8 +11,7 @@ namespace Shopegy.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderID { get; set; }
 
-        [Required]
-        public int UserID { get; set; }
+       
 
         [Required]
         public DateTime OrderDate { get; set; }
@@ -29,5 +28,11 @@ namespace Shopegy.Models
 
         // Navigation property for Payments
         public ICollection<Payment>? Payments { get; set; }
+        // Navigation property for shipping 
+        public ICollection<Shipping>? Shipping { get; set; }
+
+        [ForeignKey("User")]
+        public int UserID { get; set; }
+        public User? User { get; set; }
     }
 }

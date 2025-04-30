@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using Models;
 using Shopegy.Models;
 using System.Collections.Generic;
 using System.Reflection.Emit;
@@ -12,6 +11,9 @@ namespace Data
         public ShopegyAppContext(DbContextOptions<ShopegyAppContext> options) : base(options)
         {
         }
+        public DbSet<User> Users { get; set; }
+        public DbSet<ProductReivew> productreivew { get; set; }
+
 
         // Existing DbSet properties
         public DbSet<Shipping> Shipping { get; set; }

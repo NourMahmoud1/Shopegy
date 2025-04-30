@@ -11,9 +11,6 @@ namespace Shopegy.Models
         public int PaymentID { get; set; }
 
         [Required]
-        public int OrderID { get; set; }
-
-        [Required]
         public DateTime PaymentDate { get; set; }
 
         [Required]
@@ -27,6 +24,7 @@ namespace Shopegy.Models
 
         // Navigation property for the related Order
         [ForeignKey("OrderID")]
+        public int OrderID { get; set; }
         public required Order Order { get; set; }
     }
 }
