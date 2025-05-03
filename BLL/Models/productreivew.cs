@@ -6,7 +6,7 @@ namespace Shopegy.Models
 {
     public class ProductReivew
     {
-        public int ReviewID { get; set; }
+        public int ID { get; set; }
 
         public decimal Rating { get; set; }
         public DateTime ReviewDate { get; set; } = DateTime.Now;

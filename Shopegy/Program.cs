@@ -1,3 +1,8 @@
+using BLL.Models;
+using Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 namespace Shopegy
 {
     public class Program
@@ -8,8 +13,29 @@ namespace Shopegy
             //nour
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<ShopegyAppContext>(options =>
+				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            var app = builder.Build();
+
+
+			//register the identityuser 
+			builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
+				options =>
+				{
+					options.Password.RequireNonAlphanumeric = false;  // for easier testing  <= Omar : thanks Saeed :D
+					options.Password.RequireUppercase = false;
+					options.Password.RequireUppercase = false;
+					options.Password.RequireLowercase = false;
+					options.Password.RequireDigit = false;
+
+					/**/                   // options.SignIn.RequireConfirmedAccount = true;        // saeed 
+				}
+				).AddEntityFrameworkStores<ShopegyAppContext>().AddDefaultTokenProviders();
+
+
+
+
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
