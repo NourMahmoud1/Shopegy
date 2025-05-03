@@ -1,4 +1,6 @@
 ﻿
+using BLL.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Shopegy.Models;
 using System.Collections.Generic;
@@ -6,12 +8,12 @@ using System.Reflection.Emit;
 
 namespace Data
 {
-    public class ShopegyAppContext : DbContext
+    public class ShopegyAppContext : IdentityDbContext<ApplicationUser>
     {
         public ShopegyAppContext(DbContextOptions<ShopegyAppContext> options) : base(options)
         {
         }
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
         public DbSet<ProductReivew> productreivew { get; set; }
 
 

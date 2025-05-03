@@ -11,7 +11,7 @@ public class ShippingAddress
     public string PostalCode { get; set; }
     public string Country { get; set; }
     public Shipping Shipping { get; set; }
-    [ForeignKey("User")]
-    public int UserID { get; set; }
-    public User User { get; set; }
+    //[ForeignKey("User")]
+    //public int UserID { get; set; }
+    //public User User { get; set; }
 }
