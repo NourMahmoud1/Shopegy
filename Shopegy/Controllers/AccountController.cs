@@ -71,7 +71,15 @@ namespace Shopegy.Controllers
 					{
 						// cookie
 						await _signInManager.SignInAsync(user, isPersistent: loginViewModel.RememberMe);
-						return RedirectToAction("Index", "Home");
+						// Redirect to the desired page after successful login
+						if (await _userManager.IsInRoleAsync(user, "Admin"))
+						{
+							return RedirectToAction("Index", "Dashboard");
+						}
+						else if (await _userManager.IsInRoleAsync(user, "User"))
+						{
+							return RedirectToAction("Index", "Home");
+						}
 					}
 				}
 				ModelState.AddModelError(string.Empty, "User not found.");
@@ -85,9 +93,16 @@ namespace Shopegy.Controllers
 			{
 				await _userManager.RemoveFromRoleAsync(user, "User");
 				await _userManager.AddToRoleAsync(user, "Admin");
-				return RedirectToAction("index", "Admin");
+				return RedirectToAction("index", "Dashborard");
 			}
-			return RedirectToAction("index", "Dashborard");
+			return RedirectToAction("Register", "Account");
+		}
+		public async Task<IActionResult> Logout()
+		{
+			// Logic to log out the user
+			await _signInManager.SignOutAsync();
+			
+			return RedirectToAction("Login", "Account");
 		}
 	}
 }
