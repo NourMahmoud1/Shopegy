@@ -1,7 +1,9 @@
 using BLL.Models;
 using Data;
+using Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Repositories;
 
 namespace Shopegy
 {
@@ -16,7 +18,7 @@ namespace Shopegy
             builder.Services.AddDbContext<ShopegyAppContext>(options =>
 				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+            builder.Services.AddScoped<IUnitofWork, UnitofWork>();
 
 			//register the identityuser 
 			builder.Services.AddIdentity<ApplicationUser, IdentityRole>(

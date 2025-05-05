@@ -50,7 +50,7 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
     $(document).ready(function () {
-        $("#partialview").load('/dashbourd/getOrdersPartial');
+        // $("#partialview").load('/dashboard/getOrdersPartial');
 
     })
 </script>
@@ -58,7 +58,7 @@
     $(document).ready(function () {
 
         $.ajax({
-            url: '/Dashbourd/numberOfUsers',
+            url: '/Dashboard/numberOfUsers',
             type: 'GET',
             dataType: 'json'
             , success: function (result) {
@@ -70,7 +70,7 @@
             }
         });
         $.ajax({
-            url: '/Dashbourd/numOfProducts',
+            url: '/Dashboard/numOfProducts',
             //contentType: 'application/html; charset=utf-8',
             type: 'GET',
             dataType: 'json'
@@ -82,18 +82,18 @@
                 alert(status);
             }
         });
-        $.ajax({
-            url: '/Dashbourd/GetTotalOrdersPrice',
-            //contentType: 'application/html; charset=utf-8',
-            type: 'GET',
-            dataType: 'json'
-            , success: function (result) {
-                $('#TotalOrdersPrice').html(result);
-                console.log(result);
-            },
-            error: function (xhr, status) {
-                alert(status);
-            }
-        });
+        // $.ajax({
+        //     url: '/Dashboard/GetTotalOrdersPrice',
+        //     contentType: 'application/html; charset=utf-8',
+        //     type: 'GET',
+        //     dataType: 'json'
+        //     , success: function (result) {
+        //         $('#TotalOrdersPrice').html(result);
+        //         console.log(result);
+        //     },
+        //     error: function (xhr, status) {
+        //         alert(status);
+        //     }
+        // });
     })
 </script>

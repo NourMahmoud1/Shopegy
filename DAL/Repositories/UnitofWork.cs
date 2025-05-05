@@ -33,7 +33,7 @@ public class UnitofWork : IUnitofWork
 
 	public IRepository<ShippingAddress> ShippingAddresses { get; }
 
-	public IRepository<ApplicationUser> ApplicationUsers { get; }
+	public IRepository<ApplicationUser> Users { get; }
 
 	public void Dispose()
     { 

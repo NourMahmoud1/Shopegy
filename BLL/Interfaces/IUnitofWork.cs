@@ -22,7 +22,7 @@ public interface IUnitofWork:IDisposable
 
 	public IRepository<Shipping> Shipping { get; }
 	public IRepository<ShippingAddress> ShippingAddresses { get; }
-	public IRepository<ApplicationUser> ApplicationUsers { get; }
+	public IRepository<ApplicationUser> Users { get; }
 
 	int Save();
 
