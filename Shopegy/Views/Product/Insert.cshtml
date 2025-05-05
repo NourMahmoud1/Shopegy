@@ -3,8 +3,7 @@
 @{
     ViewData["Title"] = "Insert";
     Layout = "_DashbourdLayout";
-    SelectList catItem =
-    new SelectList(Model.categories, "Id", "Name");
+    SelectList catItem = new SelectList(Model.categories, "ProductCategorieID", "Name");
 }
 
 
@@ -114,7 +113,7 @@
                             </div>
                         </form>
                         <div class="text-center my-3">
-                            <a asp-action="products" asp-controller="dashbourd" class="btn btn-info">Back to List</a>
+                            <a asp-action="products" asp-controller="dashboard" class="btn btn-info">Back to List</a>
                         </div>
                     </div>
                 </div>

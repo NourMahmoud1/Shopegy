@@ -32,7 +32,11 @@ namespace Shopegy.Controllers
 			return View(products);
 		}
 
-
+		public async Task<IActionResult> categories()
+		{
+			List<ProductCategorie> categories = await _unitofWork.ProductCategories.GetAllAsync();
+			return View(categories);
+		}
 
 
 		public IActionResult getOrdersPartial()

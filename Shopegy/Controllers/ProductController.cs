@@ -27,10 +27,10 @@ namespace Shopegy.Controllers
 
 		[HttpGet]
 		[Authorize(Roles = "Admin")]
-		public IActionResult Insert()
+		public async Task<IActionResult> Insert()
 		{
 			ProductWithListOfCatesViewModel product = new();
-			product.categories = unitof.ProductCategories.GetAll();
+			product.categories = await unitof.ProductCategories.GetAllAsync();
 			return View(product);
 		}
 
@@ -38,17 +38,17 @@ namespace Shopegy.Controllers
 		[Authorize(Roles = "Admin")]
 		public async Task<IActionResult> InsertAsync(ProductWithListOfCatesViewModel product)
 		{
-			string uploadpath = Path.Combine(_webHostEnvironment.WebRootPath, "img");
-			string imagename = Guid.NewGuid().ToString() + "_" + product.image.FileName;
-			string filepath = Path.Combine(uploadpath, imagename);
-			using (FileStream fileStream = new FileStream(filepath, FileMode.Create))
-			{
-				product.image.CopyTo(fileStream);
-			}
-			product.ImageUrl = imagename;
 
 			if (ModelState.IsValid)
 			{
+				string uploadpath = Path.Combine(_webHostEnvironment.WebRootPath, "img");
+				string imagename = Guid.NewGuid().ToString() + "_" + product.image.FileName;
+				string filepath = Path.Combine(uploadpath, imagename);
+				using (FileStream fileStream = new FileStream(filepath, FileMode.Create))
+				{
+					product.image.CopyTo(fileStream);
+				}
+				product.ImageUrl = imagename;
 
 				await unitof.Products.InsertAsync(product);
 				unitof.Save();

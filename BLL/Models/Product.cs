@@ -10,11 +10,11 @@ namespace Shopegy.Models
 		public string Description { get; set; }
 		public decimal Price { get; set; }
 		//public float length { get; set; }
-		public string Stock { get; set; }
+		//public string Stock { get; set; }
 		public string ImageUrl { get; set; } = "wwwroot/images/sfdsdf";  // default image
 
-		public DateTime Created_at { get; set; } = DateTime.Now;
-		public DateTime Updated_at { get; set; } = DateTime.Now;
+		public DateTime? Created_at { get; set; } = DateTime.Now;
+		public DateTime? Updated_at { get; set; } = DateTime.Now;
 
 		public int Quantity { get; set; }
 
