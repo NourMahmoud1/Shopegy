@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using BLL.ViewModel;
+using Interfaces;
 using Shopegy.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace BLL.Interfaces
 {
 	public interface IProductRepository : IRepository<Product>
 	{
-
+		public Task InsertAsync(ProductWithListOfCatesViewModel p);
 	}
 }

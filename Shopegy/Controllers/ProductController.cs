@@ -36,7 +36,7 @@ namespace Shopegy.Controllers
 
 		[HttpPost]
 		[Authorize(Roles = "Admin")]
-		public IActionResult Insert(ProductWithListOfCatesViewModel product)
+		public async Task<IActionResult> InsertAsync(ProductWithListOfCatesViewModel product)
 		{
 			string uploadpath = Path.Combine(_webHostEnvironment.WebRootPath, "img");
 			string imagename = Guid.NewGuid().ToString() + "_" + product.image.FileName;
@@ -50,9 +50,9 @@ namespace Shopegy.Controllers
 			if (ModelState.IsValid)
 			{
 
-				//productService.Insert(product);
-
-				return RedirectToAction("products", "Dashbourd");
+				await unitof.Products.InsertAsync(product);
+				unitof.Save();
+				return RedirectToAction("products", "Dashboard");
 			}
 
 			return View(product);

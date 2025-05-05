@@ -27,5 +27,6 @@ namespace Shopegy.Models
 
 		// navigation property for product review
 		public ICollection<ProductReivew> ProductReivews { get; set; }
+		public decimal? Rating { get; set; }
 	}
 }

@@ -35,7 +35,6 @@ namespace Shopegy.Controllers
 
 
 
-
 		public IActionResult getOrdersPartial()
 		{
 			List<Order> orders = _unitofWork.Orders.GetAll("User");
