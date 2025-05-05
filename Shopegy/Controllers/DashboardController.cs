@@ -26,7 +26,11 @@ namespace Shopegy.Controllers
 		{
 			return View();
 		}
-
+		public IActionResult Products()
+		{
+			List<Product> products = _unitofWork.Products.GetAll();
+			return View(products);
+		}
 
 
 

@@ -26,26 +26,46 @@ public class Repository<T> : IRepository<T> where T : class
 		}
 		return _context.Set<T>().Include(include).ToList();
 	}
-
+	public async Task<List<T>> GetAllAsync(string? include = null)
+	{
+		if (include == null)  // from default or passed from a calling function
+		{
+			return await _context.Set<T>().ToListAsync();
+		}
+		return await _context.Set<T>().Include(include).ToListAsync();
+	}
+//----------------------------
 	public T GetById(int id)
     {
         return _context.Set<T>().Find(id);
     }
-    public void Add(T entity)
+	public async Task<T> GetByIdAsync(int id)
+	{
+		return await _context.Set<T>().FindAsync(id);
+	}
+	//---------------------------------
+	public void Add(T entity)
     {
         _context.Set<T>().Add(entity);
         //_context.SaveChanges();
     }
-
-    public void Delete(T entity)
+	public async Task AddAsync(T entity)
+	{
+		await _context.Set<T>().AddAsync(entity);
+	}
+	//---------------------------------
+	public void Delete(T entity)
     {
         _context.Set<T>().Remove(entity);
         //_context.SaveChanges();
     }
 
-    public void Update(T entity)
+	//------------------------------------------
+
+	public void Update(T entity)
     {
         _context.Set<T>().Update(entity);
         //_context.SaveChanges();
     }
+	
 }

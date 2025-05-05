@@ -1,4 +1,5 @@
-﻿using BLL.Models;
+﻿using BLL.Interfaces;
+using BLL.Models;
 using Shopegy.Models;
 using System;
 using System.Collections.Generic;
@@ -12,17 +13,17 @@ namespace  Interfaces;
 public interface IUnitofWork:IDisposable
 {
 
-	public IRepository<Product> Products { get; }
+	public IProductRepository Products { get; }
 
-	public IRepository<ProductCategorie> ProductCategories { get; }
+	public IProductCategorieRepository ProductCategories { get; }
 
-	public IRepository<Order> Orders { get; }
-	public IRepository<OrderItem> OrderItems { get; }
-	public IRepository<ProductReivew> ProductReviews { get; }
+	public IOrderRepository Orders { get; }
+	public IOrderItemRepository OrderItems { get; }
+	public IProductReviewRepository ProductReviews { get; }
 
 	public IRepository<Shipping> Shipping { get; }
 	public IRepository<ShippingAddress> ShippingAddresses { get; }
-	public IRepository<ApplicationUser> Users { get; }
+	//public IRepository<ApplicationUser> Users { get; }
 
 	int Save();
 

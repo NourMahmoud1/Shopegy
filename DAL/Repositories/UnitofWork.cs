@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BLL.Interfaces;
 using BLL.Models;
+using DAL.Repositories;
 using Data;
 using Interfaces;
 using Shopegy.Models;
@@ -12,28 +14,36 @@ namespace Repositories;
 
 public class UnitofWork : IUnitofWork
 {
-    private readonly ShopegyAppContext _context;
 
-    public UnitofWork(ShopegyAppContext context)
+    private readonly ShopegyAppContext _context;
+    private readonly Lazy<IProductRepository> _productRepository;
+    private readonly Lazy<IProductCategorieRepository> _productCategorieRepository;
+	private readonly Lazy<IOrderRepository> _orderRepository;
+    private readonly Lazy<IOrderItemRepository> _orderItemRepository;
+	private readonly Lazy<IProductReviewRepository> _productReviewRepository;
+	public UnitofWork(ShopegyAppContext context)
     {
         _context = context;
-        Products = new Repository<Product>(_context);
-		ProductCategories = new Repository<ProductCategorie>(_context);
-    }
-    public IRepository<Product> Products { get; }
-    public IRepository<ProductCategorie> ProductCategories { get; }
+		_productRepository = new Lazy<IProductRepository>(new ProductRepository(_context));
+        _productCategorieRepository = new Lazy<IProductCategorieRepository>(new ProductCategorieRepository(_context));
+		_orderRepository = new Lazy<IOrderRepository>(new OrderRepository(_context));
+		_orderItemRepository = new Lazy<IOrderItemRepository>(new OrderItemRepository(_context));
+		_productReviewRepository = new Lazy<IProductReviewRepository>(new ProductReivewRepository(_context));
+	}
+    public IProductRepository Products => _productRepository.Value;
+	public IProductCategorieRepository ProductCategories => _productCategorieRepository.Value;
 
-	public IRepository<Order> Orders { get; }
+	public IOrderRepository Orders => _orderRepository.Value;
 
-	public IRepository<OrderItem> OrderItems { get; }
+	public IOrderItemRepository OrderItems => _orderItemRepository.Value;
 
-	public IRepository<ProductReivew> ProductReviews { get; }
+	public IProductReviewRepository ProductReviews => _productReviewRepository.Value;
 
 	public IRepository<Shipping> Shipping { get; }
 
 	public IRepository<ShippingAddress> ShippingAddresses { get; }
 
-	public IRepository<ApplicationUser> Users { get; }
+	//public IRepository<ApplicationUser> Users { get; }
 
 	public void Dispose()
     { 
