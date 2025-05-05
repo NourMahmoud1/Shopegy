@@ -10,7 +10,7 @@ namespace Shopegy
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            //nour
+           
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ShopegyAppContext>(options =>
@@ -22,17 +22,13 @@ namespace Shopegy
 			builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
 				options =>
 				{
-					options.Password.RequireNonAlphanumeric = false;  // for easier testing  <= Omar : thanks Saeed :D
+					options.Password.RequireNonAlphanumeric = false; 
 					options.Password.RequireUppercase = false;
 					options.Password.RequireUppercase = false;
 					options.Password.RequireLowercase = false;
 					options.Password.RequireDigit = false;
-
-					/**/                   // options.SignIn.RequireConfirmedAccount = true;        // saeed 
 				}
 				).AddEntityFrameworkStores<ShopegyAppContext>().AddDefaultTokenProviders();
-
-
 
 
 			var app = builder.Build();
@@ -47,6 +43,7 @@ namespace Shopegy
             app.UseRouting();
 
             app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.MapControllerRoute(

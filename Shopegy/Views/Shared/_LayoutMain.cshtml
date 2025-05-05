@@ -173,6 +173,20 @@
                         <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
                         <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
                     </a>
+                    <div class="d-flex align-items-center ms-4 mb-4">
+                        <div class="position-relative">
+                            <img class="rounded-circle" src="/images/user.jpg" alt="" style="width: 40px; height: 40px;">
+                            <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                        </div>
+                        <div class="ms-3">
+                            @if (User.Identity.IsAuthenticated == true)
+                            {
+                                <h6 class="mb-0">@User.Identity.Name</h6>
+                                <span>Admin</span>
+
+                            }
+                        </div>
+                    </div>
                     <button type="button"
                             class="navbar-toggler"
                             data-toggle="collapse"
