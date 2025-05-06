@@ -36,13 +36,13 @@ namespace Shopegy.Controllers
 
 			return View(products);
         }
-        public IActionResult GetProducts()
-        {
-            var products = _context.Products
-                                   .Include(p => p.ProductCategorie)
-                                   .ToList();
-            return PartialView("_ProductList", products);
-        }
+        //public IActionResult GetProducts()
+        //{
+        //    var products = _context.Products
+        //                           .Include(p => p.ProductCategorie)
+        //                           .ToList();
+        //    return PartialView("_ProductList", products);
+        //}
 
     }
 }
