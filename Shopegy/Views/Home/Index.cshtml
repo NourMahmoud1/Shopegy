@@ -1,4 +1,6 @@
-﻿
-@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<Shopegy.Models.ProductCategorie>
+
+@foreach (var ProductCategorie in Model)
+{
+    <partial name="_product_categoury" model="ProductCategorie" />
 }
