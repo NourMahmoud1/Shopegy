@@ -15,26 +15,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shopegy.Models;
 using Data;
+using Interfaces;
 
 namespace Shopegy.Controllers
 {
     public class ShopController : Controller
     {
-        private readonly ShopegyAppContext _context;
+        
+        private readonly IUnitofWork _unitofWork;
+		public ShopController(IUnitofWork unitofWork)
+		{
+			
+			_unitofWork = unitofWork;
+		}
 
-        public ShopController(ShopegyAppContext context)
+		// Action لعرض كل المنتجات في الصفحة الرئيسية للمحل
+		public async Task<IActionResult> Index()
         {
-            _context = context;
-        }
+            var products = await _unitofWork.Products.GetAllAsync();
 
-        // Action لعرض كل المنتجات في الصفحة الرئيسية للمحل
-        public IActionResult Index()
-        {
-            var products = _context.Products
-                .Include(p => p.ProductCategorie) // لو حابب تجيب التصنيف مع المنتج
-                .ToList();
-
-            return View(products);
+			return View(products);
         }
         public IActionResult GetProducts()
         {

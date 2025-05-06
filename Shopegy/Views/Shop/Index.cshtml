@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<Shopegy.Models.Product>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -190,6 +191,10 @@
                         </div>
                     </div>
 
+					@foreach (var product in Model)
+					{
+						<partial name="_Product_Shop_Item" model="product" />
+					}
 
                     <div class="col-12">
                         <nav>
