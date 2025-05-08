@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace  Repositories;
 
-public class Repository<T> : IRepository<T> where T : class
+public abstract class Repository<T> : IRepository<T> where T : class
 {
     private readonly ShopegyAppContext _context;
 
@@ -18,7 +18,7 @@ public class Repository<T> : IRepository<T> where T : class
         _context = context;
     }
 
-	public List<T> GetAll(string? include = null)
+	public virtual List<T> GetAll(string? include = null)
 	{
 		if (include == null)  // from default or passed from a calling function
 		{
@@ -26,7 +26,7 @@ public class Repository<T> : IRepository<T> where T : class
 		}
 		return _context.Set<T>().Include(include).ToList();
 	}
-	public async Task<List<T>> GetAllAsync(string? include = null)
+	public  async virtual Task<List<T>> GetAllAsync(string? include = null)
 	{
 		if (include == null)  // from default or passed from a calling function
 		{
@@ -35,26 +35,26 @@ public class Repository<T> : IRepository<T> where T : class
 		return await _context.Set<T>().Include(include).ToListAsync();
 	}
 //----------------------------
-	public T GetById(int id)
+	public virtual T GetById(int id)
     {
         return _context.Set<T>().Find(id);
     }
-	public async Task<T> GetByIdAsync(int id)
+	public async virtual Task<T> GetByIdAsync(int id)
 	{
 		return await _context.Set<T>().FindAsync(id);
 	}
 	//---------------------------------
-	public void Add(T entity)
+	public virtual void  Add(T entity)
     {
         _context.Set<T>().Add(entity);
         //_context.SaveChanges();
     }
-	public async Task AddAsync(T entity)
+	public async virtual Task AddAsync(T entity)
 	{
 		await _context.Set<T>().AddAsync(entity);
 	}
 	//---------------------------------
-	public void Delete(T entity)
+	public virtual  void Delete(T entity)
     {
         _context.Set<T>().Remove(entity);
         //_context.SaveChanges();
@@ -62,7 +62,7 @@ public class Repository<T> : IRepository<T> where T : class
 
 	//------------------------------------------
 
-	public void Update(T entity)
+	public virtual void Update(T entity)
     {
         _context.Set<T>().Update(entity);
         //_context.SaveChanges();

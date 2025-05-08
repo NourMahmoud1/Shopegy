@@ -21,6 +21,8 @@ public class UnitofWork : IUnitofWork
 	private readonly Lazy<IOrderRepository> _orderRepository;
     private readonly Lazy<IOrderItemRepository> _orderItemRepository;
 	private readonly Lazy<IProductReviewRepository> _productReviewRepository;
+	private readonly Lazy<ICartRepository> _cartRepository;
+	private readonly Lazy<ICartItemsRepository> _cartItemsRepository;
 	public UnitofWork(ShopegyAppContext context)
     {
         _context = context;
@@ -29,10 +31,13 @@ public class UnitofWork : IUnitofWork
 		_orderRepository = new Lazy<IOrderRepository>(new OrderRepository(_context));
 		_orderItemRepository = new Lazy<IOrderItemRepository>(new OrderItemRepository(_context));
 		_productReviewRepository = new Lazy<IProductReviewRepository>(new ProductReivewRepository(_context));
+		_cartRepository = new Lazy<ICartRepository>(new CartRepository(_context));
+		_cartItemsRepository = new Lazy<ICartItemsRepository>(new CartItemsRepository(_context));
 	}
     public IProductRepository Products => _productRepository.Value;
 	public IProductCategorieRepository ProductCategories => _productCategorieRepository.Value;
-
+	public ICartRepository Carts => _cartRepository.Value;
+	public ICartItemsRepository CartItems => _cartItemsRepository.Value;
 	public IOrderRepository Orders => _orderRepository.Value;
 
 	public IOrderItemRepository OrderItems => _orderItemRepository.Value;

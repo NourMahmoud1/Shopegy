@@ -16,7 +16,8 @@ public interface IUnitofWork:IDisposable
 	public IProductRepository Products { get; }
 
 	public IProductCategorieRepository ProductCategories { get; }
-
+	public ICartRepository Carts { get; }
+	public ICartItemsRepository CartItems { get; }
 	public IOrderRepository Orders { get; }
 	public IOrderItemRepository OrderItems { get; }
 	public IProductReviewRepository ProductReviews { get; }

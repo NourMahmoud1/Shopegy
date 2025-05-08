@@ -17,6 +17,7 @@ namespace BLL.Models
 		public string? State { get; set; }
 		public string? PostalCode { get; set; }
 		public string? Country { get; set; }
+		public List<Cart>? Carts { get; set; }
 		public List<Payment>? Payments { get; set; }
 		public List<Shipping>? Shippings { get; set; }
 		public List<Order>? Orders { get; set; }
