@@ -1,4 +1,6 @@
-﻿    <!-- Breadcrumb Start -->
+﻿@model List<BLL.ViewModel.CartItemViewModel>    
+
+<!-- Breadcrumb Start -->
     <div class="container-fluid">
         <div class="row px-xl-5">
             <div class="col-12">
@@ -25,6 +27,13 @@
                             <th>Remove</th>
                         </tr>
                     </thead>
+                <tbody class="align-middle">
+					@foreach (var item in Model)
+					{
+						<partial name="Cart_Item" model="item" />
+					}
+                </tbody>
+
                 </table>
             </div>
             <div class="col-lg-4">

@@ -12,5 +12,7 @@ namespace BLL.Interfaces
 	{
 
 		public Task<CartItem> GetByProductId(int cartId, int productId);
+		
+		public List<CartItem> GetAllCartItem(Func<CartItem,bool> where, string? include);
 	}
 }

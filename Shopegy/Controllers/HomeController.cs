@@ -16,7 +16,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        var categories = _unitofWork.ProductCategories.GetAll(); // ?? ??? ?????? ???????? ??? ????? ????
+        var categories = _unitofWork.ProductCategories.GetAll();
         return View(categories);
     }
 

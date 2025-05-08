@@ -58,9 +58,15 @@
 							My Account
 						</button>
 						<div class="dropdown-menu dropdown-menu-right">
-							<button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Login", "Account")'">Sign in</button>
-							<button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Register", "Account")'">Sign up</button>
-							<button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Logout", "Account")'">Sign Out</button>
+							@* check if user is log in *@
+							@if(!User.Identity.IsAuthenticated){
+								<button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Login", "Account")'">Login</button>
+								<button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Register", "Account")'">Register</button>
+							}
+							else{
+
+							<button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Logout", "Account")'">Logout</button>
+							}
 						</div>
 					</div>
 					<div class="btn-group mx-2">

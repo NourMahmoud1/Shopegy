@@ -76,7 +76,7 @@ namespace Shopegy.Controllers
 						{
 							return RedirectToAction("Index", "Dashboard");
 						}
-						else if (await _userManager.IsInRoleAsync(user, "User"))
+						else
 						{
 							return RedirectToAction("Index", "Home");
 						}

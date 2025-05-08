@@ -18,12 +18,25 @@ namespace DAL.Repositories
 		{
 			_context = context;
 		}
+
+		public List<CartItem> GetAllCartItem(Func<CartItem, bool> where, string? include)
+		{
+			if (include == null)  // from default or passed from a calling function
+			{
+				return _context.Set<CartItem>().Where(where).ToList();
+			}
+			return  _context.Set<CartItem>().Include(include).Where(where).ToList();
+
+		}
+
 		public async Task<CartItem> GetByProductId(int cartId, int productId)
 		{
 			return await _context.Set<CartItem>()
 				.Include(ci => ci.Product) 
 				.FirstOrDefaultAsync(ci => ci.CartId == cartId && ci.ProductId == productId);
 		}
+
+		
 	}
 	
 }
