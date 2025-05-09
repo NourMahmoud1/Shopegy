@@ -1,4 +1,5 @@
-﻿//using Microsoft.AspNetCore.Mvc;
+﻿
+//using Microsoft.AspNetCore.Mvc;
 
 //namespace Shopegy.Controllers
 //{
@@ -21,20 +22,25 @@ namespace Shopegy.Controllers
 {
     public class ShopController : Controller
     {
-        
-        private readonly IUnitofWork _unitofWork;
-		public ShopController(IUnitofWork unitofWork)
-		{
-			
-			_unitofWork = unitofWork;
-		}
 
-		// Action لعرض كل المنتجات في الصفحة الرئيسية للمحل
-		public async Task<IActionResult> Index()
+        private readonly IUnitofWork _unitofWork;
+        public ShopController(IUnitofWork unitofWork)
+        {
+
+            _unitofWork = unitofWork;
+        }
+
+        // Action لعرض كل المنتجات في الصفحة الرئيسية للمحل
+        public async Task<IActionResult> Index(int? categoryId)
         {
             var products = await _unitofWork.Products.GetAllAsync();
 
-			return View(products);
+            if (categoryId.HasValue)
+            {
+                products = products.Where(p => p.ProductCategorieID == categoryId.Value).ToList();
+            }
+
+            return View(products);
         }
         //public IActionResult GetProducts()
         //{

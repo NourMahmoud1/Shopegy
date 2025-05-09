@@ -10,18 +10,26 @@
                     <button class="btn btn-sm btn-primary btn-minus">
                         <i class="fa fa-minus"></i>
  *@
-<tr>
-    <td class="align-middle d-flex align-items-center gap-2">
-        <img src="~/img/@Model.ImageUrl" alt="@Model.Name" class="rounded" style="width: 50px; height: 50px; object-fit: cover;">
-        <span class="fw-semibold">@Model.Name</span>
-    </td>
 
-    <td class="align-middle">
-        <div class="input-group input-group-sm mx-auto" style="width: 120px;">
-            <button class="btn btn-outline-secondary" type="button">-</button>
-            <input type="text" class="form-control text-center" value="1">
-            <button class="btn btn-outline-secondary" type="button">+</button>
+@* <a class="text-decoration-none" href=""> *@
+<a asp-action="Index" asp-controller="Shop" asp-route-categoryId="@Model.ProductCategorieID" class="text-decoration-none">
+    <div class="cat-item d-flex align-items-center mb-4">
+        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+            <img class="img-fluid" src="~/img/@Model.ImageUrl" alt="">
         </div>
-    </td>
-</tr>
+        <div class="flex-fill pl-3">
+            <h6>@Model.Name</h6>
+            <small class="text-body">100 Products</small>
+        </div>
+    </div>
+</a>
 
+
+<td class="align-middle">
+    <div class="input-group input-group-sm mx-auto" style="width: 120px;">
+
+
+        <button class="btn btn-outline-secondary" type="button">+</button>
+    </div>
+</td>
+</tr>
