@@ -3,23 +3,44 @@
 @model BLL.ViewModel.CartItemViewModel
 
 <tr>
-    <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> @Model.ProductName</td>
-    <td class="align-middle">$@Model.Price</td>
-    <td class="align-middle">
-        <div class="input-group quantity mx-auto" style="width: 100px;">
-            <div class="input-group-btn">
-                <button class="btn btn-sm btn-primary btn-minus">
-                    <i class="fa fa-minus"></i>
-                </button>
-            </div>
-            <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="@Model.Quantity">
-            <div class="input-group-btn">
-                <button class="btn btn-sm btn-primary btn-plus">
-                    <i class="fa fa-plus"></i>
-                </button>
-            </div>
-        </div>
-    </td>
-    <td class="align-middle">$@Model.TotalPrice</td>
-    <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+	<td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> @Model.ProductName</td>
+	<td class="align-middle">$@Model.Price</td>
+	<td class="align-middle">
+		<div class="input-group quantity mx-auto" style="width: 100px;">
+			<div class="input-group-btn">
+				<button class="btn btn-sm btn-primary btn-minus">
+					<i class="fa fa-minus"></i>
+				</button>
+			</div>
+			<input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="@Model.Quantity">
+			<div class="input-group-btn">
+				<button class="btn btn-sm btn-primary btn-plus">
+					<i class="fa fa-plus"></i>
+				</button>
+			</div>
+		</div>
+	</td>
+	<td class="align-middle">$@Model.TotalPrice</td>
+	<td class="align-middle">
+		<button href="#myModal-@Model.ProductId" data-toggle="modal" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
+
+		<div id="myModal-@Model.ProductId" class="modal fade">
+			<div class="modal-dialog modal-confirm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Are you sure?</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<p>Do you really want to delete these records? This process cannot be undone.</p>
+					</div>
+					<div class="modal-footer">
+						<a asp-action="GetAll" asp-controller="CartItem" data-dismiss="modal" class="btn btn-text">Cancel</a>
+						<a asp-action="Delete" asp-controller="CartItem" asp-route-id="@Model.CartItemId" class="btn btn-danger btn-text">Delete</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</td>
+
 </tr>

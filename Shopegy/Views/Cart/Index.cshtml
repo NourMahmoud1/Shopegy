@@ -1,4 +1,8 @@
 ﻿@model List<BLL.ViewModel.CartItemViewModel>    
+@{
+	ViewData["Title"] = "Shopping Cart";
+	var TotalPrice = 0.0;
+}
 
 <!-- Breadcrumb Start -->
     <div class="container-fluid">
@@ -28,10 +32,21 @@
                         </tr>
                     </thead>
                 <tbody class="align-middle">
-					@foreach (var item in Model)
+					@if (Model == null || Model.Count == 0)
 					{
-						<partial name="Cart_Item" model="item" />
+						<tr>
+							<td colspan="5" class="text-center">Your cart is empty.</td>
+						</tr>
 					}
+                    @foreach (var item in Model)  
+                    {  
+                       <partial name="Cart_Item" model="item" />  
+                       if(item.Price != null){
+							TotalPrice += (double)item.Price * (double)item.Quantity;
+                       }
+                       
+                      
+                    }
                 </tbody>
 
                 </table>
@@ -60,7 +75,7 @@
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
-                            <h5>$0</h5>
+                            <h5>$@TotalPrice</h5>
                         </div>
                         <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
                     </div>

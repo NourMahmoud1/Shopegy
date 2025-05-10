@@ -34,7 +34,7 @@ namespace Shopegy.Controllers
 			List<CartItemViewModel> cartItemViewModels = new List<CartItemViewModel>();
 			foreach (var item in cartItems)
 			{
-				CartItemViewModel cartItemViewModel = new CartItemViewModel(item.ProductId, item.Product.Name, item.Product.ImageUrl, item.Product.Price, item.Quantity);
+				CartItemViewModel cartItemViewModel = new CartItemViewModel(item.ProductId, item.Product.Name, item.Product.ImageUrl, item.Product.Price, item.Quantity,item.Id);
 
 				cartItemViewModels.Add(cartItemViewModel);
 			}
