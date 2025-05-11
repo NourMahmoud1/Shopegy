@@ -57,8 +57,19 @@ namespace Shopegy.Controllers
 
 			return View(category);
 		}
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Delete(int id)
+        {
+            var category = unitof.ProductCategories.GetById(id);
+            if (category == null)
+                return NotFound();
 
-		//--------------------------------------------
+            unitof.ProductCategories.Delete(category);
+            unitof.Save();
+            return RedirectToAction("Insert");
+        }
+        //--------------------------------------------
 
-	}
+    }
 }

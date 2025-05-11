@@ -102,6 +102,23 @@ namespace Shopegy.Controllers
 				// if the user is not authenticated, redirect to the login page
 				return RedirectToAction("Login", "Account");
 			}
+
 		}
-	}
+        
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var product = await unitof.Products.GetByIdAsync(id);
+            if (product == null)
+                return NotFound();
+
+            unitof.Products.Delete(product);
+            unitof.Save();
+
+            return RedirectToAction("products", "Dashboard");
+        }
+
+
+    }
 }
