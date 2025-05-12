@@ -69,7 +69,7 @@ namespace Shopegy.Controllers
 
             unitof.ProductCategories.Delete(category);
             unitof.Save();
-            return RedirectToAction("Insert");
+            return RedirectToAction("categories", "Dashboard");
         }
         //--------------------------------------------
         [HttpGet]
