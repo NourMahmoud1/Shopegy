@@ -3,6 +3,7 @@ using Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Shopegy.Models;
 
 namespace Shopegy.Controllers
@@ -55,5 +56,43 @@ namespace Shopegy.Controllers
 			int prods = _unitofWork.Products.GetAll().Count();
 			return Json(prods);
 		}
-	}
+        // List all normal (non-admin) users
+        public async Task<IActionResult> Users()
+        {
+            var allUsers = userManager.Users.ToList();
+            var normalUsers = new List<ApplicationUser>();
+
+            foreach (var user in allUsers)
+            {
+                var roles = await userManager.GetRolesAsync(user);
+                if (!roles.Contains("Admin"))
+                {
+                    normalUsers.Add(user);
+                }
+            }
+
+            return View(normalUsers);
+        }
+
+        // List all admin users
+        public async Task<IActionResult> Admins()
+        {
+            var allUsers = userManager.Users.ToList();
+            var adminUsers = new List<ApplicationUser>();
+
+            foreach (var user in allUsers)
+            {
+                var roles = await userManager.GetRolesAsync(user);
+                if (roles.Contains("Admin"))
+                {
+                    adminUsers.Add(user);
+                }
+            }
+
+            return View(adminUsers);
+        }
+
+
+
+    }
 }
