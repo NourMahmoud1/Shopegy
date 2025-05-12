@@ -12,7 +12,7 @@ namespace Data
     {
         public ShopegyAppContext(DbContextOptions<ShopegyAppContext> options) : base(options)
         {
-        }
+            }
         //public DbSet<User> Users { get; set; }
         public DbSet<ProductReivew> productreivew { get; set; }
 

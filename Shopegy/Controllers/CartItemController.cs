@@ -23,5 +23,30 @@ namespace Shopegy.Controllers
 			return RedirectToAction("Index", "Cart");
 
 		}
+
+		public async Task<IActionResult> UpdateQuantityByOne(int id)
+		{
+			CartItem cartItem = await _unitofWork.CartItems.GetByIdAsync(id);
+			if (cartItem == null)
+			{
+				return NotFound();
+			}
+			cartItem.Quantity++;
+			_unitofWork.CartItems.Update(cartItem);
+			_unitofWork.Save();
+			return RedirectToAction("Index", "Cart");
+		}
+		public async Task<IActionResult> UpdateQuantityByMinusOne(int id)
+		{
+			CartItem cartItem = await _unitofWork.CartItems.GetByIdAsync(id);
+			if (cartItem == null)
+			{
+				return NotFound();
+			}
+			cartItem.Quantity--;
+			_unitofWork.CartItems.Update(cartItem);
+			_unitofWork.Save();
+			return RedirectToAction("Index", "Cart");
+		}
 	}
 }

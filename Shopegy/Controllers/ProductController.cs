@@ -119,55 +119,7 @@ namespace Shopegy.Controllers
 
             return RedirectToAction("products", "Dashboard");
         }
-        //[HttpGet]
-        //[Authorize(Roles = "Admin")]
-        //public IActionResult Update(int id)
-        //{
-        //    var product = unitof.Products.GetById(id);
-        //    if (product == null)
-        //        return NotFound();
-
-        //    // إنشاء ViewModel يحتوي على المنتج والفئات المتاحة
-        //    var viewModel = new ProductWithListOfCatesViewModel
-        //    {
-        //        //ProductID = product.ProductID,
-        //        Name = product.Name,
-        //        Description = product.Description,
-        //        Price = product.Price,
-        //        Quantity = product.Quantity,
-        //        CategoryId = product. ProductCategorieID, // هنا لازم تبعت CategoryID
-        //        Rating = product.Rating,
-        //        Color = product.Color,
-        //        ImageUrl = product.ImageUrl, // هنا لو فيه صورة
-        //        categories = unitof.ProductCategories.GetAll() // جلب جميع الفئات المتاحة
-        //    };
-
-        //    return View("Insert", viewModel); // العودة لنفس صفحة Insert ولكن مع البيانات المعدلة
-        //}
-
-
-        //[HttpPost]
-        //[Authorize(Roles = "Admin")]
-        //public IActionResult UpDate(Product product)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return View("Insert", product); // إعادة عرض نفس الصفحة مع البيانات
-
-        //    var existing = unitof.Products.GetById(product.ProductID);
-        //    if (existing == null)
-        //        return NotFound();
-
-        //    existing.Name = product.Name;
-        //    existing.Description = product.Description;
-        //    existing.Price = product.Price;
-        //    existing.Quantity = product.Quantity;
-        //    // محدثتش الصورة هنا - ممكن تضيف شرط لو محتاج تحدثها
-
-        //    unitof.Products.Update(existing);
-        //    unitof.Save();
-
-        //    return RedirectToAction("Insert"); // ⬅ يرجع لنفس صفحة Insert بعد الحفظ
-        //}
+        
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(int id)
@@ -220,14 +172,33 @@ namespace Shopegy.Controllers
             existing.ProductCategorieID = product.CategoryId; // تحديث الفئة
             existing.Rating = product.Rating;
             existing.Color = product.Color;
-            // لو عايز تحدث الصورة، أضف كود مشابه لـ Insert
 
             unitof.Products.Update(existing);
             unitof.Save();
 
             return RedirectToAction("products", "Dashboard");
         }
+		//------------------------------------------
+		[HttpGet]
+		public async Task<IActionResult> Details(int id)
+		{
+			var product = await unitof.Products.GetByIdAsync(id);
+			if (product == null)
+				return NotFound();
+			var viewModel = new ProductWithListOfCatesViewModel
+			{
+				Id = product.ProductID,
+				Name = product.Name,
+				Description = product.Description,
+				Price = product.Price,
+				Quantity = product.Quantity,
+				Color = product.Color,
+				ImageUrl = product.ImageUrl,
+				Rating = product.Rating
+			};
+			return View(viewModel);
+		}
 
 
-    }
+	}
 }
