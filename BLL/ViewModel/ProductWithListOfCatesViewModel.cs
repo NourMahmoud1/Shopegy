@@ -38,7 +38,9 @@ public class ProductWithListOfCatesViewModel
 	//----------------------------------
 
 	[ForeignKey("Category")]
-	public int CategoryId { get; set; }
+	
 
 	public List<ProductCategorie>? categories { get; set; }
+    public int CategoryId { get; set; }
 }
+   

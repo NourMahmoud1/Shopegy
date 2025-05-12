@@ -17,19 +17,21 @@ namespace Shopegy.Controllers
 			this.unitof = unitof;
 		}
 
-		public IActionResult Index()
-		{
-			return View();
-		}
-		//--------------------------------------------
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Insert()
+        {
+            return View(new ProductCategorie()); // ✅ حل المشكلة
+        }
+        //--------------------------------------------
 
-		[HttpGet]
-		[Authorize(Roles = "Admin")]
+  //      [HttpGet]
+		//[Authorize(Roles = "Admin")]
 
-		public IActionResult Insert()
-		{
-			return View();
-		}
+		//public IActionResult Insert()
+		//{
+		//	return View();
+		//}
 
 		[HttpPost]
 		//[ValidateAntiForgeryToken]
@@ -70,6 +72,54 @@ namespace Shopegy.Controllers
             return RedirectToAction("Insert");
         }
         //--------------------------------------------
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Update(int id)
+        {
+            var category = await unitof.ProductCategories.GetByIdAsync(id);
+            if (category == null)
+                return NotFound();
+
+            return View("Insert", category);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpDate(ProductCategorie category)
+        {
+            if (category.ProductCategorieID <= 0)
+            {
+                ModelState.AddModelError("ProductCategorieID", "معرف الفئة غير صالح");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View("Insert", category);
+            }
+
+            var existing = await unitof.ProductCategories.GetByIdAsync(category.ProductCategorieID);
+            if (existing == null)
+                return NotFound();
+
+            existing.Name = category.Name;
+            existing.Description = category.Description;
+            if (category.image != null)
+            {
+                string uploadpath = Path.Combine(_webHostEnvironment.WebRootPath, "img");
+                string imagename = Guid.NewGuid().ToString() + "_" + category.image.FileName;
+                string filepath = Path.Combine(uploadpath, imagename);
+                using (FileStream fileStream = new FileStream(filepath, FileMode.Create))
+                {
+                    await category.image.CopyToAsync(fileStream);
+                }
+                existing.ImageUrl = imagename;
+            }
+
+            unitof.ProductCategories.Update(existing);
+            unitof.Save();
+
+            return RedirectToAction("categories", "Dashboard");
+        }
 
     }
 }

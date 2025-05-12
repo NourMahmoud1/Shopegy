@@ -1,12 +1,10 @@
-﻿@model BLL.ViewModel.ProductWithListOfCatesViewModel
+﻿@* @* @model BLL.ViewModel.ProductWithListOfCatesViewModel
 
 @{
     ViewData["Title"] = "Insert";
     Layout = "_DashbourdLayout";
     SelectList catItem = new SelectList(Model.categories, "ProductCategorieID", "Name");
 }
-
-
 
 
 
@@ -158,6 +156,115 @@
 </style>
 
 
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+} *@
+
+ 
+ @model BLL.ViewModel.ProductWithListOfCatesViewModel
+
+@{
+    ViewData["Title"] = Model.Id > 0 ? "Edit Product" : "Insert";
+    Layout = "_DashbourdLayout";
+    SelectList catItem = new SelectList(Model.categories, "ProductCategorieID", "Name");
+}
+
+<div class="container">
+    <div class="text-center mt-5">
+        <h1>@(Model.Id > 0 ? "Edit Product" : "Add New Product")</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-7 mx-auto">
+            <div class="card mt-2 mx-auto p-4 bg-light">
+                <div class="card-body bg-light">
+                    <div class="container">
+                        <form id="contact-form" role="form" asp-action="@(Model.Id > 0 ? "UpDate" : "Insert")" asp-controller="Product" enctype="multipart/form-data">
+                            <input type="hidden" asp-for="Id" /> <!-- حقل مخفي لـ ProductID -->
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Name" class="control-label"></label>
+                                            <input asp-for="Name" class="form-control" />
+                                            <span asp-validation-for="Name" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="image" class="control-label"></label>
+                                            <input type="file" asp-for="image" class="form-control" />
+                                            <span asp-validation-for="image" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Quantity" class="control-label"></label>
+                                            <input asp-for="Quantity" class="form-control" />
+                                            <span asp-validation-for="Quantity" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Color" class="control-label"></label>
+                                            <input asp-for="Color" class="form-control" />
+                                            <span asp-validation-for="Color" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Price" class="control-label"></label>
+                                            <input asp-for="Price" class="form-control" />
+                                            <span asp-validation-for="Price" class="text-danger"></span>
+                                        </div>
+                                        </ апро
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="form_need">Please select Category *</label>
+                                            <select id="form_need" asp-for="CategoryId" asp-items="catItem" class="form-control" required="required" data-error="Please specify your need.">
+                                                <option value="" selected disabled>--Select Category--</option>
+                                            </select>
+                                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="Rating" class="control-label"></label>
+                                            <input asp-for="Rating" class="form-control" />
+                                            <span asp-validation-for="Rating" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="Description" class="control-label"></label>
+                                            <input asp-for="Description" class="form-control" />
+                                            <span asp-validation-for="Description" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 text-center my-2">
+                                        <input type="submit" value="@(Model.Id > 0 ? "Update" : "Create")" class="btn btn-success btn-send pt-2 btn-block" />
+                                    </div>
+                                </div>
+                        </form>
+                        <div class="text-center my-3">
+                            <a asp-action="products" asp-controller="dashboard" class="btn btn-info">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     @{

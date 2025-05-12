@@ -1,6 +1,7 @@
 ﻿using BLL.Interfaces;
 using BLL.ViewModel;
 using Data;
+using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Shopegy.Models;
 using System;
@@ -33,5 +34,6 @@ namespace DAL.Repositories
 
 			await AddAsync(product);
 		}
-	} 
+       
+    } 
 }
